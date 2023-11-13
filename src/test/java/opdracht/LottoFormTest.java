@@ -234,4 +234,19 @@ public class LottoFormTest {
         PlayResult playResult = PlayResult.FOUND_5PLUS1;
         assertEquals(playResult, lottoForm.play(gamble,8));
     }
+
+    @Test
+    void LottoFormPlayNoWinBug(){
+        Set <Integer> numbers = new HashSet<Integer>();
+        numbers.add(31);
+        numbers.add(22);
+        numbers.add(33);
+        numbers.add(24);
+        numbers.add(15);
+        numbers.add(0);
+        LottoForm lottoForm = new LottoForm(numbers);
+        Set <Integer> gamble = new HashSet<Integer>(List.of(11,12,13,14,19,10));
+        PlayResult playResult = PlayResult.FOUND_6;
+        assertEquals(playResult, lottoForm.play(gamble,8));
+    }
 }
