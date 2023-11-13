@@ -3,6 +3,7 @@ package opdracht;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -56,9 +57,28 @@ public class LottoFormTest {
         numbers.add(6);
         numbers.add(7);
         LottoForm lottoForm = new LottoForm(numbers);
-        assertThrows(IllegalArgumentException.class, () -> lottoForm.play(null,10));
 
         Exception exception =  assertThrows(IllegalArgumentException.class, () -> lottoForm.play(null,10));
+
+        String expectedMessage = "Expecting 6 unique numbers + 1 extra number";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void LottoFormLL_TOO_LOW_Exception(){
+        Set <Integer> numbers = new HashSet<Integer>();
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
+        numbers.add(5);
+        numbers.add(6);
+        LottoForm lottoForm = new LottoForm(numbers);
+        Set <Integer> gamble = new HashSet<Integer>(List.of(1,2));
+
+        Exception exception =  assertThrows(IllegalArgumentException.class, () -> lottoForm.play(gamble,10));
 
         String expectedMessage = "Expecting 6 unique numbers + 1 extra number";
         String actualMessage = exception.getMessage();
