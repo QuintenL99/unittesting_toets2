@@ -14,6 +14,14 @@ public class LottoForm {
     private final Set<Integer> numbers;
     private int gg = 0;
 
+    public Set<Integer> getNumbers() {
+        return numbers;
+    }
+
+    public int getGg() {
+        return gg;
+    }
+
     public LottoForm(Set<Integer> numbers) {
         int k=9;
         if (numbers != null) {
