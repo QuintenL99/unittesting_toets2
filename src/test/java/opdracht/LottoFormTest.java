@@ -11,7 +11,12 @@ public class LottoFormTest {
 
     @Test
     void lottoformNullSet() {
-        assertThrows(IllegalArgumentException.class, () -> new LottoForm(null));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new LottoForm(null));
+
+        String expectedMessage = "Expecting 6 unique numbers";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
