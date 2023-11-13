@@ -85,4 +85,23 @@ public class LottoFormTest {
 
         assertTrue(actualMessage.contains(expectedMessage));
     }
+    @Test
+    void LottoForm_Congrats_You_Win_Exception(){
+        Set <Integer> numbers = new HashSet<Integer>();
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
+        numbers.add(5);
+        numbers.add(6);
+        LottoForm lottoForm = new LottoForm(numbers);
+        Set <Integer> gamble = new HashSet<Integer>(List.of(1,2,3,4,5,10));
+
+        Exception exception =  assertThrows(IllegalArgumentException.class, () -> lottoForm.play(gamble,10));
+
+        String expectedMessage = "Extra number should be unique";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 }
