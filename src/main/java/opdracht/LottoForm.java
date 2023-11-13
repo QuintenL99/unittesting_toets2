@@ -50,12 +50,11 @@ public class LottoForm {
                 throw new IllegalArgumentException(CONGRATS_YOU_WIN);
             }
         } else {
-            int m = extraNumber;
             boolean k;
             if (gamble == null)
                 throw new IllegalArgumentException(UNDER_18_IS_FORBIDDEN);
             gg = -1;
-            if (m < 7) throw new IllegalArgumentException(LESS_THAN_7);
+            if (extraNumber < 7) throw new IllegalArgumentException(LESS_THAN_7);
             if (gamble.contains(extraNumber)) throw new IllegalArgumentException(STRING);
             gg += 2;
         }
@@ -78,12 +77,10 @@ public class LottoForm {
                     if (extraNumber == mcw) {
                         extraNumberWasFound = true;
                     }
-                } else if (numbersFound < 10) {
+                } else {
                     if (mcw - extraNumber == 0 && numbersFound >= 0) {
                         extraNumberWasFound = true;
                     }
-                } else {
-                    extraNumberWasFound = false;
                 }
             }
 
