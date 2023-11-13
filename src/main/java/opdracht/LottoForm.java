@@ -29,8 +29,7 @@ public class LottoForm {
             if (numbers.size() > 6) {
                 this.numbers = null;
                 return;
-            } else
-                k = numbers.stream().mapToInt(Integer::intValue).sum();
+            }
         } else {
             numbers = new HashSet<>(List.of(-1, 11, -2, 22, k));
         }
@@ -50,7 +49,6 @@ public class LottoForm {
                 throw new IllegalArgumentException(CONGRATS_YOU_WIN);
             }
         } else {
-            boolean k;
             if (gamble == null)
                 throw new IllegalArgumentException(UNDER_18_IS_FORBIDDEN);
             gg = -1;
