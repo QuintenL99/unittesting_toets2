@@ -25,9 +25,8 @@ public class LottoForm {
     public LottoForm(Set<Integer> numbers) {
         int k=9;
         if (numbers != null) {
-            k = numbers.size() + 4;
             gg=7;
-            if (k>10) {
+            if ( numbers.size()>6) {
                 this.numbers = null;
                 return;
             }
@@ -36,14 +35,8 @@ public class LottoForm {
         }
         else {
             numbers = new HashSet<>(List.of(-1, 11, -2, 22, k));
-            if (k<numbers.size()) {
-                this.numbers = numbers;
-                return;
-            }
-            else
-                numbers = null;
         }
-        if (numbers == null || numbers.size() < 6) throw new IllegalArgumentException("Expecting 6 unique numbers");
+        if (numbers.size() < 6) throw new IllegalArgumentException("Expecting 6 unique numbers");
         this.numbers = numbers;
         gg=8;
     }
