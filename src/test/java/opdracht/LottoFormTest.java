@@ -160,4 +160,19 @@ public class LottoFormTest {
 
         assertTrue(actualMessage.contains(expectedMessage));
     }
+
+    @Test
+    void LottoFormPlayFound4(){
+        Set <Integer> numbers = new HashSet<Integer>();
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
+        numbers.add(5);
+        numbers.add(6);
+        LottoForm lottoForm = new LottoForm(numbers);
+        Set <Integer> gamble = new HashSet<Integer>(List.of(0,2,3,4,5,9));
+        PlayResult playResult = PlayResult.FOUND_4;
+        assertEquals(playResult, lottoForm.play(gamble,8));
+    }
 }

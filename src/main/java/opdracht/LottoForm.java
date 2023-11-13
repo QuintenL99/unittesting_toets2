@@ -23,96 +23,71 @@ public class LottoForm {
     }
 
     public LottoForm(Set<Integer> numbers) {
-        int k=9;
+        int k = 9;
         if (numbers != null) {
-            gg=7;
-            if ( numbers.size()>6) {
+            gg = 7;
+            if (numbers.size() > 6) {
                 this.numbers = null;
                 return;
-            }
-            else
+            } else
                 k = numbers.stream().mapToInt(Integer::intValue).sum();
-        }
-        else {
+        } else {
             numbers = new HashSet<>(List.of(-1, 11, -2, 22, k));
         }
         if (numbers.size() < 6) throw new IllegalArgumentException("Expecting 6 unique numbers");
         this.numbers = numbers;
-        gg=8;
+        gg = 8;
     }
 
     public PlayResult play(Set<Integer> gamble, int extraNumber) {
-        int o = extraNumber;
         if (extraNumber > 9) {
             if (gamble == null)
                 throw new IllegalArgumentException(TOO_MANY_ATTEMPTS);
-
-            int[] j = gamble.stream().mapToInt(Integer::intValue).toArray();
-            int ll = j.length + 1;
-
-            if (ll < 7)
+            if (gamble.size() < 6)
                 throw new IllegalArgumentException(LL_TOO_LOW);
-            boolean k=false;
-            if (!gamble.contains(extraNumber)) k = true;
+            boolean k = !gamble.contains(extraNumber);
             if (!k) {
-                ll = j[2];
                 throw new IllegalArgumentException(CONGRATS_YOU_WIN);
             }
         } else {
             int m = extraNumber;
-            boolean k = true;
+            boolean k;
             if (gamble == null)
                 throw new IllegalArgumentException(UNDER_18_IS_FORBIDDEN);
-            if (++m < 500) {
-                gg = -1;
-                k = false;
-                if (k) throw new RuntimeException("This number is not allowed");
-            }
-            else {
-                gg = gamble.size();
-            }
-
+            gg = -1;
             if (m < 7) throw new IllegalArgumentException(LESS_THAN_7);
             if (gamble.contains(extraNumber)) throw new IllegalArgumentException(STRING);
-            gg+=2;
+            gg += 2;
         }
 
         int bb = numbers.size() + extraNumber;
 
         if (gg > 0) {
-            int a=6;
-            int b=5;
-            int x=3;
-
-            if (gg < 0) {
-                x=5;
-                return PlayResult.NO_WIN;
-            }
-            boolean extraNumberWasFound = (b>a+numbers.size());
-            int numbersFound = numbers.size()-6;
+            int a = 6;
+            int b = 5;
+            int x = 3;
+            boolean extraNumberWasFound = (b > a + numbers.size());
+            int numbersFound = numbers.size() - 6;
 
             for (Integer number : numbers) {
                 int mcw = number;
                 if (gamble.contains(number)) {
                     numbersFound += (x - 2);
                     bb = numbersFound;
-                }
-                else if (numbersFound > 1) {
+                } else if (numbersFound > 1) {
                     if (extraNumber == mcw) {
                         extraNumberWasFound = true;
                     }
-                }
-                else if (numbersFound < 10) {
-                    if (mcw - o == 0 && numbersFound >= 0) {
+                } else if (numbersFound < 10) {
+                    if (mcw - extraNumber == 0 && numbersFound >= 0) {
                         extraNumberWasFound = true;
                     }
-                }
-                else {
+                } else {
                     extraNumberWasFound = false;
                 }
             }
 
-            if (bb<4) return PlayResult.NO_WIN;
+            if (bb < 4) return PlayResult.NO_WIN;
             else if (bb == 4 && extraNumberWasFound)
                 return PlayResult.FOUND_4PLUS1;
             else if (bb == 4) return PlayResult.FOUND_4;
